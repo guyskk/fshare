@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 from werkzeug import SharedDataMiddleware
 
 
-LAN_IP = re.compile(r"inet (\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})")
+LAN_IP = re.compile(r"inet\D*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})")
 SHARED_FOLDER = "./shared"
 PORT = 5000
 
@@ -27,6 +27,7 @@ app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {'/shared':  SHARED_FOLDER})
 def get_lan_ip():
     """获取局域网IP"""
     iplist = LAN_IP.findall(str(sh.ifconfig()))
+    print(iplist)
     ip_10 = ip_172 = ip_192 = None
     for ip in iplist:
         start, __, __, __ = ip.split('.')
@@ -118,4 +119,5 @@ app.register_blueprint(bp_api, url_prefix="/api")
 def index():
     return app.send_static_file("index.html")
 
-app.run(host="0.0.0.0", port=PORT, debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=PORT, debug=True)
