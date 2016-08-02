@@ -7,7 +7,7 @@
         <div class="clear"></div>
       </div>
       <div class="server-qrcode" @click="showCode">
-        <span>点击查看二维码</span>
+        <span>查看二维码</span>
         <span></span>
       </div>
       <div class="clear"></div>
@@ -81,7 +81,7 @@
     ready () {
       res.shared.get_server_address()
        .then( data => {
-          this.$data.url = data.url
+          this.$data.url = data.url.split('/')[2]
           new QRCode(document.getElementById('popup'), data.url)
         })
        .catch( err => {
@@ -119,15 +119,6 @@
     width: 100px;
     z-index: $index
   }
-  @mixin respond-to($breakpoint) {
-    @if $breakpoint === 'sm' {
-      @media (max-width: 600px) {
-        #app {
-          width: 98%;
-        }
-      }
-    };
-  };
   html {
     height: 100%;
     #app {
@@ -136,9 +127,14 @@
       margin: 10px auto;
       font-family: Source Sans Pro, Helvetica, sans-serif;
       text-align: center;
-      @include respond-to('sm');
+      @media screen and (max-width: 600px) {
+        width: 96%;
+      }
       .file-server {
         z-index: 1;
+        @media screen and (max-width: 600px) {
+          font-size: 12px;
+        }
         span {
           height: 30px;
           line-height: 30px;
@@ -156,9 +152,11 @@
               width: 30px;
               height: 30px;
               line-height: 30px;
-              background-image: url('./assets/shrink.png');
-              background-size: 27px 27px;
+              background-image: url('./assets/qrcode.png');
+              background-size: 20px 20px;
               text-align: center;
+              background-repeat: no-repeat;
+              margin-top: 3px;
             }
           }
         }
@@ -167,7 +165,7 @@
         width: 300px;
         height: 300px;
         z-index: 99;
-        background: rgba(0,0,0,.2);
+        background: rgba(0,0,0,.6);
         position: absolute;
         left: 50%;
         top: 50%;
@@ -184,7 +182,7 @@
         .list-top {
           height: 45px;
           line-height: 45px;
-          background: rgba(0,0,0,.3);
+          background: #4078c0;
           border: 0.5px solid #ccc;
           border-radius: 3px;
           color: #fff;
