@@ -20,7 +20,7 @@
       <div class="list-body">
         <div class="file-specifc" v-for="file in files">
           <span>{{file}}</span>
-          <a target="_blank" :href="'http://localhost:5000/shared/' + file" class="download"></a>
+          <a target="_blank" :href="'/shared/' + file" class="download"></a>
           <span :filename="file" class="delete" @click="deleteFile($event)"></span>
         </div>
       </div>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-  import res from '../res.min.js'
+  import res from './res.min.js'
   export default {
     name: 'app',
     data() {

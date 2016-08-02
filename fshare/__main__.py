@@ -12,7 +12,7 @@ LAN_IP = re.compile(r"inet\D*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})")
 
 
 def create_app(server_address, shared_folder):
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder="static/dist")
     if not exists(shared_folder):
         makedirs(shared_folder)
     app.add_url_rule('/shared/<filename>', 'shared', build_only=True)
