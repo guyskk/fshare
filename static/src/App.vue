@@ -119,6 +119,15 @@
     width: 100px;
     z-index: $index
   }
+  @mixin respond-to($breakpoint) {
+    @if $breakpoint === 'sm' {
+      @media (max-width: 600px) {
+        #app {
+          width: 98%;
+        }
+      }
+    };
+  };
   html {
     height: 100%;
     #app {
@@ -127,6 +136,7 @@
       margin: 10px auto;
       font-family: Source Sans Pro, Helvetica, sans-serif;
       text-align: center;
+      @include respond-to('sm');
       .file-server {
         z-index: 1;
         span {
