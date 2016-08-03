@@ -19,8 +19,8 @@ module.exports = {
     dev: {
         env: require('./dev.env'),
         port: 8080,
-        assetsSubDirectory: '',
-        assetsPublicPath: '/static',
+        assetsSubDirectory: 'static',
+        assetsPublicPath: '/',
         proxyTable: {
             '/api': {
                 target: 'http://127.0.0.1:5000',
